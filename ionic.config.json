@@ -1,7 +1,14 @@
 {
   "name": "tech-tok",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:8080"
+    }
+  ]
 }
