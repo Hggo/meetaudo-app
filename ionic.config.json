@@ -1,0 +1,7 @@
+{
+  "name": "tech-tok",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
