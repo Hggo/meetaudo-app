@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DashboardService, SensorData } from './dashboard.service';
-import { Chart } from 'chart.js';
+import { DashboardUtils } from './dashboard.utils';
+import { ModalController } from '@ionic/angular';
+import { FilterPage } from './filter/filter.page';
 
 
 @Component({
@@ -9,40 +11,67 @@ import { Chart } from 'chart.js';
   styleUrls: ['dashboard.page.scss']
 })
 export class DashboardPage implements OnInit {
-  @ViewChild('barChart', {static: false}) barChart;
   private data: SensorData[];
   public bars: any;
-  constructor(private dashboardService: DashboardService) {}
+  public chartRows: ChartRow[];
+  constructor(private dashboardService: DashboardService,
+              private modalController: ModalController) { }
+
   public async ngOnInit() {
+    this.chartRows = [
+      {
+        cols: [
+          {
+            id: 'chart1',
+            value: 'Battery Volts',
+            field: 'Date',
+            unit: '',
+            title: 'Voltagem da bateria',
+            type: 'bar',
+          }
+        ]
+      }, {
+        cols: [
+          {
+            id: 'chart2',
+            value: 'Average Power',
+            field: 'Date',
+            unit: '',
+            title: 'Potência média',
+            type: 'line'
+          }
+        ]
+      }
+    ];
     this.data = await this.dashboardService.getdata();
-    this.createBarChart();
+    this.createBarCharts();
   }
 
-  private createBarChart() {
-    // Battery Volts
-    const field = 'Battery Volts';
-    const replace = 'R';
-    const data = this.data.filter(el => el[field] !== null).map(element => element[field]);
-    const labels = this.data.map(element => new Date(element.Date));
-    this.bars = new Chart(this.barChart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Voltagem da bateria',
-          data,
-          backgroundColor: 'rgb(38, 194, 129)',
-          borderColor: 'rgb(38, 194, 129)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'time'
-          }]
-        }
-      }
+  private createBarCharts() {
+    this.chartRows.forEach((row) => {
+      row.cols.forEach(card => {
+        const nativeElement = document.getElementById(card.id);
+        const chartData = DashboardUtils.prepareData(this.data, card.value, card.field, card.unit);
+        DashboardUtils.buildBarChart(nativeElement, card.type, chartData.data, chartData.labels, card.title);
+      });
     });
   }
+
+  public async openFilter() {
+    const modal = await this.modalController.create({
+      component: FilterPage
+    });
+    return await modal.present();
+  }
+}
+
+interface ChartRow {
+  cols: {
+    id: string;
+    field: string;
+    value: string;
+    unit: string;
+    title: string;
+    type: string;
+  }[];
 }

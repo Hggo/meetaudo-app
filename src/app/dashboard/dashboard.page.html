@@ -14,13 +14,23 @@
   </ion-header>
 
   <ion-content>
-    <ion-card class="welcome-card">
-      <ion-card-header>
-        <ion-card-subtitle>Voltagem da bateria por dia</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <canvas #barChart></canvas>
-      </ion-card-content>
-    </ion-card>
+    <ion-grid>
+      <ion-row *ngFor="let row of chartRows">
+        <ion-col *ngFor="let card of row.cols" [size]='12 / row.cols.length'>
+          <ion-card>
+            <ion-card-content>
+              <canvas [id]="card.id"></canvas>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="openFilter()">
+      <ion-fab-button>
+        <ion-icon name="filter-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
   </ion-content>
 </ion-content>

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DashboardPage } from './dashboard.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { DashboardService } from './dashboard.service';
+import { FilterPage } from './filter/filter.page';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { DashboardService } from './dashboard.service';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: DashboardPage }])
   ],
-  declarations: [DashboardPage],
+  declarations: [DashboardPage, FilterPage],
+  entryComponents: [FilterPage],
   providers: [DashboardService]
 })
 export class DashboardPageModule {}
