@@ -1,1 +1,22 @@
-gorgoroth
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>Filtros</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="filter()">Filtrar</ion-button>
+            <ion-button (click)="close()">Fechar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <ion-list>
+        <ion-item>
+            <ion-label>Data inicial</ion-label>
+            <ion-datetime displayFormat="DD MM YY" placeholder="Selecione" [(ngModel)]="dateModel.start"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Data final</ion-label>
+            <ion-datetime displayFormat="DD MM YY" placeholder="Selecione" [(ngModel)]="dateModel.end"></ion-datetime>
+        </ion-item>
+    </ion-list>
+</ion-content>
