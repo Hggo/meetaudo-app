@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Sensores
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list>
+    <ion-item button (click)="openDetail(sensor)" *ngFor="let sensor of sensors">
+      <ion-label>{{sensor.title}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

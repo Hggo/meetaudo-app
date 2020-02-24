@@ -3,8 +3,10 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
+import { SensorsPage } from './sensors.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { SensorService } from './sensor.service';
+import { DetailPage } from './detail/detail.page';
 
 @NgModule({
   imports: [
@@ -12,8 +14,10 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab2Page }])
+    RouterModule.forChild([{ path: '', component: SensorsPage }])
   ],
-  declarations: [Tab2Page]
+  declarations: [SensorsPage, DetailPage],
+  providers: [SensorService],
+  entryComponents: [DetailPage]
 })
-export class Tab2PageModule {}
+export class SensorsPageModule {}
