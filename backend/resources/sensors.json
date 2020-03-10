@@ -1,0 +1,11 @@
+[
+    {
+        "title": "Fast sensor"
+    }, {
+        "title": "Slow sensor"
+    }, {
+        "title": "Audio slave sensor"
+    }, {
+        "title": "Sleep sensor"
+    }
+]
