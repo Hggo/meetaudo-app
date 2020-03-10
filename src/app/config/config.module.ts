@@ -3,8 +3,11 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { ConfigPage } from './config.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { Camera } from '@ionic-native/camera/ngx';
+import { UserDetailPage } from './user-detail/user.detail.page';
+
 
 @NgModule({
   imports: [
@@ -12,8 +15,10 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab3Page }])
+    RouterModule.forChild([{ path: '', component: ConfigPage }])
   ],
-  declarations: [Tab3Page]
+  declarations: [ConfigPage, UserDetailPage],
+  providers: [Camera],
+  entryComponents: [UserDetailPage]
 })
-export class Tab3PageModule {}
+export class ConfigPageModule {}

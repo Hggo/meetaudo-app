@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Configurações
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list>
+    <ion-item button (click)="openDetail('username')">
+      <ion-label>
+        <h2 class="with-weight">Nome</h2>
+        <h3>{{user.username}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openDetail('email')">
+      <ion-label>
+        <h2 class="with-weight">E-mail</h2>
+        <h3>{{user.email}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openDetail('phoneNumber')">
+      <ion-label>
+        <h2 class="with-weight">Número de celular</h2>
+        <h3>{{user.phoneNumber}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="openCamera()">
+      <ion-avatar slot="end">
+        <img [src]="sanitizer.bypassSecurityTrustUrl(user.profilePic)" *ngIf="user.profilePic !== ''">
+      </ion-avatar>
+      <ion-label>
+        <h2 class="with-weight">{{(hasProfilePicture) ? 'Trocar' : 'Adicionar'}} foto de perfil</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

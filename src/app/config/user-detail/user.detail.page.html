@@ -1,0 +1,18 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>{{field}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()">Fechar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <ion-item>
+        <ion-label position="floating">{{field}}</ion-label>
+        <ion-input [(ngModel)]="fieldValue"></ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+        <ion-button expand="block" (click)="save()">Salvar</ion-button>
+    </div>
+</ion-content>
