@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HTTP } from '@ionic-native/http/ngx';
+import { HttpClient } from '@angular/common/http';
 import { baseUrl } from '../../constants';
 
 
@@ -7,19 +7,18 @@ import { baseUrl } from '../../constants';
 export class UserService {
     private baseUrl: string;
     public currentUser: User;
-    constructor(private http: HTTP) {
+    constructor(private http: HttpClient) {
         this.baseUrl = baseUrl;
     }
 
     public async setupUser(): Promise<void> {
-        const response = await this.http.get(`${this.baseUrl}/user`, {}, {});
-        this.currentUser = JSON.parse(JSON.parse(response.data)) as User;
+        const response = await this.http.get<string>(`${this.baseUrl}/user`, {}).toPromise();
+        this.currentUser = JSON.parse(response) as User;
         console.log(this.currentUser);
     }
 
     public async updateUser(user: User): Promise<void> {
-        this.http.setDataSerializer('json');
-        await this.http.post(`${this.baseUrl}/user`, user, {'Content-Type': 'application/json'});
+        await this.http.post(`${this.baseUrl}/user`, user).toPromise();
         await this.setupUser();
     }
 }

@@ -34,7 +34,7 @@
   (writeFile "resources/user.json" userData)
   {:status 200
     :headers {"Content-Type" "application/json"}
-    :body (to-json {:message "user was updated"})})
+    :body (to-json userData)})
 
 (defroutes all-routes
   (POST "/user" {body :body} (updateUserData body))

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HTTP } from '@ionic-native/http/ngx';
 import { baseUrl } from '../constants';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class DashboardService {
     private baseUrl: string;
-    constructor(private http: HTTP) {
+    constructor(private http: HttpClient) {
         this.baseUrl = baseUrl;
     }
 
     public async getdata(): Promise<SensorData[]> {
-        const response = await this.http.get(`${this.baseUrl}/dashboard/data`, {}, {});
-        return JSON.parse(JSON.parse(response.data));
+        const response = await this.http.get<string>(`${this.baseUrl}/dashboard/data`, {}).toPromise();
+        return JSON.parse(response);
     }
 }
 
